@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: power2024
+      MYSQL_DATABASE: speedymart
+      MYSQL_USER: user
+      MYSQL_PASSWORD: power2024
+    volumes:
+      - db_data:/var/lib/mysql
+    ports:
+      - "3306:3306"
+
+  web:
+    build: .
+    ports:
+      - "5000:5000"
+    environment:
+      FLASK_APP: app
+      FLASK_ENV: development
+      DATABASE_URL: mysql+pymysql://user:power2024@db:3306/speedymart
+    depends_on:
+      - db
+
+volumes:
+  db_data:

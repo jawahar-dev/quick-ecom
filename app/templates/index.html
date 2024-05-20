@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SpeedyMart</title>
+</head>
+<body>
+    <h1>Products</h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <h2>{{ product.name }}</h2>
+            <p>{{ product.description }}</p>
+            <p>${{ product.price }}</p>
+            <form action="{{ url_for('add_to_cart', product_id=product.id) }}" method="post">
+                <input type="number" name="quantity" value="1" min="1">
+                <input type="submit" value="Add to Cart">
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+    <a href="{{ url_for('cart') }}">View Cart</a>
+    <br>
+    <a href="{{ url_for('add_product') }}">Add Product</a>
+</body>
+</html>
