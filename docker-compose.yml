@@ -22,7 +22,7 @@ services:
     environment:
       FLASK_APP: app.py
       FLASK_ENV: development
-      DATABASE_URL: mysql+pymysql://user:power2024@db:5432/speedymart
+      DATABASE_URL: mysql+pymysql://user:power2024@db:3306/speedymart
     depends_on:
       - db
 
