@@ -1,9 +1,14 @@
-from flask import render_template, request, redirect, url_for, flash
-from . import db
-from .models import Product, CartItem
-from . import create_app
+from flask import render_template, request, redirect, url_for, flash, Flask
 
-app = create_app()
+from models import Product, CartItem, db
+
+
+app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:power2024@localhost/intrestDB'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db.init_app(app)
 
 @app.route('/')
 def index():
@@ -44,3 +49,10 @@ def add_product():
         return redirect(url_for('index'))
     
     return render_template('add_product.html')
+
+
+
+if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
+    app.run(debug=True)
