@@ -5,11 +5,9 @@ Setup Instructions
 Prerequisites
 Docker
 Docker Compose
-Getting Started
 Clone the Repository
 
-sh
-Copy code
+
 git clone <repository-url>
 cd speedymart
 Create requirements.txt

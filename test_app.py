@@ -1,13 +1,15 @@
 import unittest
+from flask_testing import TestCase
 from app import app, db
 from models import Product, CartItem
 
-class FlaskTestCase(unittest.TestCase):
+class FlaskTestCase(TestCase):
 
     def setUp(self):
         # Setup a test client
         app.config['TESTING'] = True
-        app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:power2024@localhost/intrestDB'
+        app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///:memory:'
+        app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
         #db.init_app(app)
         self.app_context = app.app_context()
         self.app_context.push()
