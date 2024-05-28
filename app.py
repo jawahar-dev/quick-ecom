@@ -5,8 +5,9 @@ from models import Product, CartItem, db
 
 app = Flask(__name__)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:power2024@db:3306/speedymart'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:power2024@localhost/speedymart'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.secret_key = 'your_secret_key_here'
 
 
 db.init_app(app)

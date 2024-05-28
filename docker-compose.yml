@@ -1,29 +1,24 @@
-version: '3.8'
+version: '3'
 
 services:
   web:
     build: .
-    depends_on:
-      - db
-    environment:
-      - FLASK_ENV=development
-      - FLASK_APP=app.py
-      - SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:power2024@db:3306/speedymart
-      - SQLALCHEMY_TRACK_MODIFICATIONS=False
     ports:
       - "5000:5000"
     volumes:
       - .:/app
+    depends_on:
+      - db
+    environment:
+      FLASK_ENV: development
+      FLASK_APP: app.py
+      SECRET_KEY: 'your_secret_key_here' # Set your secret key here
+      SQLALCHEMY_DATABASE_URI: 'mysql://root:power2024@db/speedymart' # Update the database URI if needed
 
   db:
-    image: mysql:5.7
+    image: mysql:latest
     environment:
-      MYSQL_ROOT_PASSWORD: power2024
-      MYSQL_DATABASE: speedymart
-    volumes:
-      - db_data:/var/lib/mysql
+      MYSQL_ROOT_PASSWORD: "power2024"
+      MYSQL_DATABASE: "speedymart"
     ports:
       - "3306:3306"
-
-volumes:
-  db_data:
