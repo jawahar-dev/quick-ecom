@@ -1,20 +1,19 @@
-version: '3'
+version: '3.8'
+
 services:
   web:
-    build:
-      context: .
-      dockerfile: Dockerfile
+    build: .
     depends_on:
       - db
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_USER=root
-      - DATABASE_PASSWORD=power2024
-      - DATABASE_NAME=speedymart
+      - FLASK_ENV=development
+      - FLASK_APP=app.py
+      - SQLALCHEMY_DATABASE_URI=mysql+pymysql://root:power2024@db:3306/speedymart
+      - SQLALCHEMY_TRACK_MODIFICATIONS=False
     ports:
-      - "8000:8000"
-    links:
-      - db
+      - "5000:5000"
+    volumes:
+      - .:/app
 
   db:
     image: mysql:5.7
